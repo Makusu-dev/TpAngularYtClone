@@ -1,0 +1,13 @@
+<!-- TODO: utiliser des formgroup -->
+<div class = "form-container">
+    <form (ngSubmit)="login()">
+      <fieldset >
+        <legend >Login</legend>
+        <div >
+          <input class="input" type="text" [value]="email()" (input)="updateEmail($event)" placeholder="Mail" aria-label="email">
+        </div>        
+          <input class="input" type="text" [value]="password()" (input)="updatePassword($event)" placeholder="Password" aria-label="password">                       
+      </fieldset>
+      <button class="btn"  type="submit">Login</button>  
+    </form>
+</div>
