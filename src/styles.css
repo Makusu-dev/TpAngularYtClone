@@ -1,2 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+html {
+    background: #000000;
+    background: linear-gradient(90deg,rgba(0, 0, 0, 1) 0%, rgba(130, 21, 21, 1) 66%, rgb(223, 47, 38) 100%);
+}
