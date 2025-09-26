@@ -1,5 +1,7 @@
 <div class="navbar bg-base-100 shadow-sm" >              
-        <div><a class="btn btn-ghost text-xl" routerLink="/home">Home</a></div>      
+        <div><a class="btn btn-ghost text-xl" routerLink="/home">Home</a></div>   
+        <div><a class="btn btn-ghost text-xl" routerLink="/potd">Picture of the day</a></div>      
+        <div><a class="btn btn-ghost text-xl" routerLink="/search">Search</a></div>      
         @if(isLoggedIn()){
             <div><a class="btn btn-ghost text-xl" (click)="logout()">Logout</a></div>
         }                

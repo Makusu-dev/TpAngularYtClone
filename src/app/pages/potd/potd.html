@@ -1,0 +1,11 @@
+<div class="card bg-base-100 w-96 shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title">{{nasaPOTD()?.title}}</h2>
+      <p>{{nasaPOTD()?.explanation}}</p>
+    </div>
+    <figure>
+      <img
+        src={{nasaPOTD()?.url}}
+        alt="Nasa picture of the day" />
+    </figure>
+  </div>

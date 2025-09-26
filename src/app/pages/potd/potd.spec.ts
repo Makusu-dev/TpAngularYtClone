@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Video } from './video';
+import { POTD } from './potd';
 
-describe('Video', () => {
-  let component: Video;
-  let fixture: ComponentFixture<Video>;
+describe('POTD', () => {
+  let component: POTD;
+  let fixture: ComponentFixture<POTD>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Video]
+      imports: [POTD]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Video);
+    fixture = TestBed.createComponent(POTD);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
