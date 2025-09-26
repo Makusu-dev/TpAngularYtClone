@@ -17,12 +17,12 @@ export class NAPOD {
   }
 
   searchForVideos(query: string){
-    return this.http.get<NasaApi>(`${environment.NASA_API_IMAGE_BASE_URL}/search?q=${query}`)
+    // TODO: Si vide?
+    return this.http.get<NasaApi>(`${environment.NASA_API_IMAGE_BASE_URL}/search?q=${query}&media_type=video&page_size=5`)
   }
 
   getAssetDetail(nasaId: string){
-    return this.http.get<NasaApi>(`${environment.NASA_API_IMAGE_BASE_URL}/search?q=${query}`)
-    //  https://images-api.nasa.gov/asset/GSFC_20120420_SDO_m10966_Year2
+    return this.http.get<NasaApi>(`${environment.NASA_API_IMAGE_BASE_URL}/asset/${nasaId}`)
   }
 
 

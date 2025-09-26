@@ -9,6 +9,7 @@ export const routes: Routes = [
     {path: 'login', loadComponent: ()=> import("./pages/login/login").then(m =>m.Login)},
     {path: 'potd', loadComponent: ()=> import("./pages/potd/potd").then(m =>m.POTD)},
     {path: 'search', loadComponent: ()=> import("./pages/search/search").then(m =>m.Search)},
+    {path: 'video/:id', loadComponent: ()=> import("./pages/video/video").then(m =>m.Video)},
     {path: 'admin',canActivate: [adminGuard], loadChildren: () => import('./pages/admin/admin').then(m => m.Admin), data: { role: 'ADMIN' } },
     //version si besoin de multiplier les routes admin
     // {path: 'admin',canActivate: [adminGuard], loadChildren: () => import('./pages/admin/admin.routes').then(m => m.ADMIN_ROUTES), data: { role: 'ADMIN' } },
