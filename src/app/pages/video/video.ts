@@ -21,11 +21,15 @@ export class Video {
     this.nasaApi.getAssetDetail(nasaId).subscribe({
       next: (data)=>{
         this.asset.set(data.collection);
-        console.log(this.asset());        
+        console.log(this.asset());
+        
       },
       error: error =>{
         console.log(error);        
       }
     })
   }
+
+
+
 }
