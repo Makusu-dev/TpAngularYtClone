@@ -14,22 +14,22 @@ export class Video {
   asset=signal<Collection|null>(null);
   //TODO: nom de merde pour le service a changer
   private nasaApi: NAPOD = inject(NAPOD)
-  
+  isLoading = signal<boolean>(true);
+
   ngOnInit(){
     const nasaId=this.route.snapshot.params['id'];
 
     this.nasaApi.getAssetDetail(nasaId).subscribe({
       next: (data)=>{
         this.asset.set(data.collection);
+        this.isLoading.set(false); 
         console.log(this.asset());
         
       },
       error: error =>{
-        console.log(error);        
+        console.log(error);
+        this.isLoading.set(false);         
       }
     })
   }
-
-
-
 }

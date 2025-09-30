@@ -1,4 +1,4 @@
-<div class="card bg-base-100 w-96 shadow-sm">
+<!-- <div class="card bg-base-100 w-96 shadow-sm">
     <div class="card-body">
       <h2 class="card-title">{{nasaPOTD()?.title}}</h2>
       <p>{{nasaPOTD()?.explanation}}</p>
@@ -8,4 +8,22 @@
         src={{nasaPOTD()?.url}}
         alt="Nasa picture of the day" />
     </figure>
+  </div> -->
+
+<div class="hero bg-base-200 min-h-screen">
+  <div class="hero-content flex-col lg:flex-col">
+    <img
+      src={{nasaPOTD()?.url}}
+      class="max-w-mid rounded-lg shadow-2xl"
+    />
+    <div>
+      <h1 class="text-5xl font-bold">{{nasaPOTD()?.title}}</h1>
+      <p class="text-2x2 font-semibold">Copyright: {{nasaPOTD()?.copyright}}</p>
+      <p class="py-6">
+        {{nasaPOTD()?.explanation}}
+      </p>
+      <!-- TODO: button to erase or find a usage -->
+      <!-- <button class="btn btn-primary">Get Started</button> -->
+    </div>
   </div>
+</div>

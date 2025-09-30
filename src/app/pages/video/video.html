@@ -1,5 +1,18 @@
-<p></p>
-<video width="320" height="240" controls>
+@if(isLoading()){
+<div class="spinner">
+  <span class="loading loading-spinner loading-xl"></span>
+  <p>Chargement de la vidéo...</p>
+</div>
+}
+@if(!isLoading() && asset()){
+<div class="videocontainer">
+  <video width="320" height="240" controls>
     <source src="{{asset()!.items[3].href}}" type="video/mp4">
-  Your browser does not support the video tag.
-</video> 
+    Your browser does not support the video tag.
+  </video>
+</div>
+}
+
+@if(!isLoading() && !asset()){
+  <p>Impossible de charger la vidéo.</p>
+}
