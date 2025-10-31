@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
   styleUrl: './search.css'
 })
 export class Search {
-  private nasaApi = inject(NAPOD);
-  private router = inject(Router)
+  private readonly nasaApi = inject(NAPOD);
+  private readonly router = inject(Router)
   searchResults = signal<NasaApi | null>(null)
   searchString=signal('');
 

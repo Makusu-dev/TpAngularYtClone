@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Collection } from '../../interfaces/nasa-api';
 import { NAPOD } from '../../services/napod';
 
+
+
 @Component({
   selector: 'app-video',
   imports: [],
@@ -10,21 +12,19 @@ import { NAPOD } from '../../services/napod';
   styleUrl: './video.css'
 })
 export class Video {
-  private route = inject(ActivatedRoute)
+  private readonly route = inject(ActivatedRoute)
   asset=signal<Collection|null>(null);
-  //TODO: nom de merde pour le service a changer
-  private nasaApi: NAPOD = inject(NAPOD)
+  //TODO: nom nul pour le service a changer
+  private readonly nasaApi: NAPOD = inject(NAPOD)
   isLoading = signal<boolean>(true);
 
   ngOnInit(){
     const nasaId=this.route.snapshot.params['id'];
-
     this.nasaApi.getAssetDetail(nasaId).subscribe({
       next: (data)=>{
         this.asset.set(data.collection);
         this.isLoading.set(false); 
-        console.log(this.asset());
-        
+        console.log(this.asset());        
       },
       error: error =>{
         console.log(error);

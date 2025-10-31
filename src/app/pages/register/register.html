@@ -1,18 +1,33 @@
-<!-- TODO: utiliser des formgroup -->
 <div class = "form-container">
-    <form (ngSubmit)="OnSubmit()">
+    <form [formGroup]="registerForm" (ngSubmit)="OnSubmit()">
       <fieldset >
         <legend >Register</legend>        
         <div>
-            <input class="input" type="text" [value]="email()" (input)="updateEmail($event)" placeholder="Mail" aria-label="email">
+            <input class="input" type="text" formControlName="email" placeholder="Mail" aria-label="email">
         </div>
         <div>
-            <input class="input" type="text" [value]="password()" (input)="updatePassword($event)" placeholder="Password" aria-label="password">
+            <input class="input" type="text" formControlName="pseudo" placeholder="pseudo" aria-label="username">
         </div>
         <div>
-            <input class="input" type="text" [value]="passwordConfirm()" (input)="updateConfirmPassword($event)" placeholder="confirm Password" aria-label="password">
+            <input class="input" type="text" formControlName="password" placeholder="Password" aria-label="password">
+        </div>
+        <div>
+            <input class="input" type="text" formControlName="passwordConfirm" placeholder="confirm Password" aria-label="password">
+        </div>
+        <div>
+            <input class="input" type="text" formControlName="cityCode" placeholder="cityCode" aria-label="cityCode">
+        </div>
+        <div>
+            <input class="input" type="text" formControlName="city" placeholder="city" aria-label="city">
+        </div>
+        <div>
+            <input class="input" type="text" formControlName="phone" placeholder="phone" aria-label="phone">
         </div>
       </fieldset>
+       <!-- Affichage des erreurs -->
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
       <button class="btn" type="submit">register</button>              
     </form>
   </div>

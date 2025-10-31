@@ -1,52 +1,58 @@
 import { Component, inject, Signal, signal } from '@angular/core';
-import { User } from '../../interfaces/user';
-import { FormsModule } from '@angular/forms';
+import { User, UserToRegister } from '../../interfaces/user';
+import { FormGroup, FormBuilder, Validator, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Auth } from '../../services/auth';
+import { firstValueFrom } from 'rxjs';
+
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
+
 export class Register {  
-  email = signal('');
-  password = signal('');
-  passwordConfirm = signal('');
+  registerForm: FormGroup;
   errorMessage = signal('');
   
-  constructor(private readonly userService: Auth,
-    private readonly router: Router) {    
+  constructor(
+    private readonly userService: Auth,
+    private readonly router: Router,
+    private fb: FormBuilder) {   
+      this.registerForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      pseudo:['', [Validators.required, Validators.minLength(2)]],
+      password: ['', [Validators.required, Validators.minLength(2)]],
+      passwordConfirm: ['', Validators.required],
+      cityCode: ['', Validators.required],
+      city:['',Validators.required],
+      phone: ['',Validators.required]
+    }); 
   }
 
-  OnSubmit() {
-      if (this.password() == this.passwordConfirm()) {
-        console.log(this.email());
-      const userToRegister: User = {email: this.email(), password: this.password(), roles: ['ADMIN']}        
-      const register = this.userService.register(userToRegister)
-
-      if(register){
-        this.router.navigate(["/login"])
-      }
-      else {
-        this.errorMessage.set('Email ou mot de passe incorrect');
-      }
+  async OnSubmit() {
+    if (this.registerForm.invalid) {
+      this.errorMessage.set('Veuillez remplir tous les champs correctement.');
+      return;
     }
+
+    const user: UserToRegister = this.registerForm.value;    
+    //appel au service register   
+      try{
+        const registerSuccess: boolean = await firstValueFrom(this.userService.register(user))
+        if(registerSuccess){
+          this.router.navigate(['/login']);
+        }
+        else{
+          this.errorMessage.set('Une erreur est survenue');
+        }
+      }catch(error){
+        console.error('Erreur lors de l\'inscription:', error);
+        this.errorMessage.set('Une erreur est survenue. Veuillez réessayer.');
+      }; 
   }
 
-   updateEmail(event: Event) {
-    const target = event.target as HTMLInputElement;
-    this.email.set(target.value);
-  }
-
-  updatePassword(event: Event) {
-    const target = event.target as HTMLInputElement;
-    this.password.set(target.value);
-  }
-
-  updateConfirmPassword(event: Event) {
-    const target = event.target as HTMLInputElement;
-    this.passwordConfirm.set(target.value);
-  }
+   
 }

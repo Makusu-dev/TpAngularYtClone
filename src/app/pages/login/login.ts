@@ -1,5 +1,6 @@
 import { Component, inject, signal, Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { firstValueFrom } from 'rxjs';
 
 
 import { Router } from '@angular/router';
@@ -22,15 +23,21 @@ export class Login {
   constructor(private readonly userService: Auth, private readonly router: Router){
   }
 
-  login() {
+  async login() {
     const userToConnect : User = {email: this.email(), password: this.password(),roles: []}
-    const loginSuccess = this.userService.login(userToConnect)
-    if(loginSuccess){
+    try{
+        const loginSuccess =await firstValueFrom(this.userService.login(userToConnect));
+        if(loginSuccess){
       this.router.navigate(['/profile']);
     }
     else {
       this.errorMessage.set('Email ou mot de passe incorrect');
     }
+    }catch (error) {
+    console.error('Erreur lors du login:', error);
+    this.errorMessage.set('Une erreur est survenue. Veuillez réessayer.');
+  }
+    
   }
 
   updateEmail(event: Event) {
